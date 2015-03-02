@@ -1,0 +1,116 @@
+
+* Title of the project: 	
+
+  3D visualization and interactive optimization of simplified HP protein models 
+  
+	
+
+* Description: 	
+  In the simplified HP protein model each protein sequence is represented as a chain of two types of residues: H and P. The chain can take different configurations in a 3D regular lattice. Associated to each configuration it is possible to compute in a simple way an energy value. The problems addressed in this project consists in: given a chain, to represent the different possible 3D configurations of the chain, to compute the associated energy, and to allow the user to change the 3D position of the chain with the mouse to interactively improve  the energy values of the configuration. Additionally, an optimization algorithm should be linked to the program to find a configuration that further improves the energy values of the protein.
+ 
+
+* Tasks: 	
+ - 3D visualization of simplified HP protein chains. 
+ - Design of an interface that allows the user to modify, using the mouse, the chain position.
+ - To program an algorithm for computing the energy function associated to the configuration.
+ - To program a simple estimation of distribution algorithm (see references) for optimizing the energy function.
+
+References:
+
+Simplified protein model and its optimization:
+
+- Wikipedia (http://en.wikipedia.org/wiki/Hydrophobic-polar_protein_folding_model)
+- http://www.sc.ehu.es/ccwbayes/members/rsantana/software/matlab/HPModel.html
+- http://www.scielo.br/pdf/ca/v23n1/a03v23n1.pdf 
+- http://www.teses.usp.br/teses/disponiveis/55/55134/tde-14052010-143653/pt-br.php
+- http://www.pergamum.udesc.br/dados-bu/000000/000000000005/00000528.pdf
+- http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.125.8883&rep=rep1&type=pdf
+
+EDAs
+- http://pt.wikipedia.org/wiki/Algoritmos_de_estima%C3%A7%C3%A3o_de_distribui%C3%A7%C3%A3o
+- http://ieeexplore.ieee.org/xpl/abstractKeywords.jsp?arnumber=4407749 
+- ftp://ftp.dca.fee.unicamp.br/pub/docs/vonzuben/ia707_1s11/notas_de_aula/topico14_IA707_1s11.pdf
+- http://www.dep.uminho.pt/EscolaEas2014/slides/AlexandreDelbem.pdf
+
+Examples 3D visualization. 
+
+http://www.sciencedirect.com/science/article/pii/S1476927108000327#fig2
+http://www.plosone.org/article/fetchObject.action?uri=info:doi/10.1371/journal.pone.0059504.g004&representation=PNG_M
+http://pre.aps.org/abstract/PRE/v84/i3/e031934
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+*******************************************************************************************************
+
+* Title of the project: 	
+ 
+  Use of the survey propagation algorithm in hybrid methods for heuristic optimization
+
+ 	
+* Description: 	
+
+   
+ Message passing algorithms (MPAs) are inference methods extensively applied for inference in probabilistic graphical models. They have been also recently used as components of heuristic optimization algorithms. The survey propagation (SP) algorithm is a n MPA originally conceived for the solution of constrained problems, in particular the satisfiability problem. The goal of this proyect is to investigate the use of SP in the context of discrete optimization problems. 
+ 
+* Tasks: 	
+ - Study of the SP algorithm and the available implementations of this method.
+ - Partial review of the literature in the application of MPAs to optimization problems.
+ - Design and implementation of different variants of hybrid methods that incorporate MPAs to optimization algorithms.
+ - Evaluation of the implemented algorithms in a practical optimization problem. 
+
+References:
+- Survey propagation: an algorithm for satisfiability (http://arxiv.org/abs/cs/0212002) 
+- Introducing Belief Propagation in Estimation of Distribution Algorithms: A Parallel Approach. (http://www.sc.ehu.es/ccwbayes/publications/postscript/TechRep_EDAsAndLBP.pdf)
+- Implementations of Survey Propagation and Belief Propagation based algorithms for random satisfiability. (http://users.ictp.it/~zecchina/SP/)
+- http://download.springer.com/static/pdf/951/art%253A10.1007%252Fs11047-014-9473-2.pdf?auth66=1424717876_ee8e5201cdc723938513c6b0f61523e1&ext=.pdf
+
+
+***************************************************************************************************
+
+* Title of the project: Implementation of a program to visualize  variables-objectives interactions in the JMetal platform. 
+ 
+ 	
+* Description: 	
+
+ JMetal is an object-oriented Java program for optimization, mainly dedicated to multi-objective search with metaheuristics, where the optimization problem is characterized by a set of conflicting goals and not just one criterion that needs to be optimized.  The objective of the proyect is to design a JMetal module  that implements different types of visualizations of the relationships between objectives and variables. In the beginning, the program can be simplified to a method for visualizing correlations between objectives and variables.
+
+
+* Tasks: 	
+
+ - Study of the main concepts related to multi-objective optimization. 
+ - Analysis of the JMetal framework, its main components and available methods.
+ - Implementation of a simple multi-optimization problem using the JMetal framework. 
+ - Implementation of a program to visualize  different types of variables-objectives interactions as part of JMetal. 
+
+References:
+  
+ MOEAs:
+  - A Short Tutorial on Evolutionary Multiobjective Optimization. http://www.cs.bham.ac.uk/~durranrj/NID/documentCache/tutorial1/tutorial-slides-coello.pdf
+  - A tutorial on multi-objective optimization. http://www.lania.mx/~ccoello/EMOO/zitzler04.pdf.gz 
+  - A Benchmark Study of Multi-Objective Optimization Methods. http://www.redcedartech.com/pdfs/MO-SHERPA_paper.pdf
+  - Multi-objective optimization using genetic algorithms: A tutorial. http://www.sciencedirect.com/science/article/pii/S0951832005002012
+
+ Visualization in multi-objective optimization:
+  - https://www.dynamore.de/en/downloads/papers/09-conference/papers/F-IV-04.pdf
+  - http://www.lsoptsupport.com/documents/papers/optimization/2009/wcsmo_09_martin.pdf
+  - http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6600837
+  - http://download.springer.com/static/pdf/728/chp%253A10.1007%252F3-540-31261-7_16.pdf?auth66=1424718432_853632346158716550f683a702eed353&ext=.pdf
+  - http://www.mitpressjournals.org/doi/abs/10.1162/evco.2009.17.2.135#.VOt6-zUy2bk
+
+ JMETAL:
+  - http://en.wikipedia.org/wiki/MOEA_Framework
+  - http://jmetal.sourceforge.net/
+  - http://www.sciencedirect.com/science/article/pii/S0965997811001219
+ 
+
+
+***************************************************************************************************
+
+ 	
+
+
+
+
+
+
