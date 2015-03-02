@@ -475,6 +475,17 @@ public class CMAES extends Algorithm {
     SolutionSet resultPopulation  = new SolutionSet(1) ;
     resultPopulation.add(bestSolutionEver) ;
 
+    // by gmfritsche
+    // output the covariance matrix C
+    System.out.println("covariance matrix C");
+    for (double[] c: C) {
+        for (double e: c) {
+            System.out.print(e+"\t");
+        }
+        System.out.println();
+    }
+    // end output
+
     return resultPopulation ;
 
   } // execute
