@@ -28,7 +28,7 @@
   - Multi-objective optimization using genetic algorithms: A tutorial. http://www.sciencedirect.com/science/article/pii/S0951832005002012
 
 
- ### Visualization in multi-objective optimization  ###
+ ### Visualization in multi-objective optimization 
 
 
   - https://www.dynamore.de/en/downloads/papers/09-conference/papers/F-IV-04.pdf
