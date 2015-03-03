@@ -1,2 +1,15 @@
-*.class
-*/*.class
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!*.java
+!*.pdf
+!*.tex
+!*.sh
+!*.eps
+!*.png
+!*.jpg
+
+# ...even if they are in subdirectories
+!*/
