@@ -5,7 +5,7 @@
  JMetal is an object-oriented Java program for optimization, mainly dedicated to multi-objective search with metaheuristics, where the optimization problem is characterized by a set of conflicting goals and not just one criterion that needs to be optimized.  The objective of the proyect is to design a JMetal module  that implements different types of visualizations of the relationships between objectives and variables. In the beginning, the program can be simplified to a method for visualizing correlations between objectives and variables.
 
 
-## * Tasks: 	 ##
+## Tasks: 	 ##
 
  - Study of the main concepts related to multi-objective optimization. 
 
@@ -27,7 +27,7 @@
 
   - Multi-objective optimization using genetic algorithms: A tutorial. http://www.sciencedirect.com/science/article/pii/S0951832005002012
 
- ### Visualization in multi-objective optimization: ###
+ ### Visualization in multi-objective optimization  ###
 
   - https://www.dynamore.de/en/downloads/papers/09-conference/papers/F-IV-04.pdf
 
