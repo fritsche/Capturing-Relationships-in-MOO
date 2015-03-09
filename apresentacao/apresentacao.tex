@@ -81,15 +81,32 @@ Paraná}
 \subsection{O que é Otimização Multi-objetivo?}
 
 \frame{
-	\frametitle{O que é Otimização Multi-objetivo?}
-	
-	\begin{block}{}
+	\begin{block}{O que é Otimização Multi-objetivo?}
 		  \begin{itemize}
 		   \item Se refere a otimização simultânea de mais de um 
 objetivo.
 		  \end{itemize}
 	\end{block}
+	\begin{block}{O que é uma solução em um problema Multi-objetivo?}
+	  Na otimização multi-objetivo a solução pode não ser única, 
+mas um conjunto de soluções incomparáveis entre si. Cada solução é representada 
+por um conjunto de valores no espaço de decisão e o conjunto de valores dos 
+objetivos no espaço de objetivos.\\
+Esse conjunto pode ser 
+encontrado por meio da dominância de Pareto. O conjunto de soluções não 
+dominadas, é então, o conjunto de soluções para o problema.\\
+	\begin{itemize}
+	 \item 	Uma solução é dita ótima (não dominada) se não existe nenhuma 
+outra 
+solução melhor do que ela em algum objetivo, sem ser pior em outro.
+	 \item Uma solução é dita dominar outra, se for melhor em pelo menos um 
+objetivo sem ser pior nos demais.
+	\end{itemize}
+	\end{block}
+}
 
+\frame{
+\frametitle{O que é uma solução em um problema Multi-objetivo?}
 	\vspace{-4pt}
 	\hspace{-20pt}
 	\begin{minipage}{1.0\textwidth}
@@ -106,17 +123,15 @@ objetivo.
 \frame{
 	\frametitle{Exemplo de problema Multi-objetivo}
 	
-	\begin{block}{}
-		  Olá Mundo.
-	\end{block}
-}
-
-\frame{
-	\frametitle{O que é uma solução em um problema Multi-objetivo?}
-	
-	\begin{block}{}
-		  Olá Mundo.
-	\end{block}
+	\begin{minipage}{1.0\textwidth}
+		\begin{figure}[ht]
+		\centering
+			\includegraphics[scale = 
+0.3]{figuras/exemplo.png}
+			\caption{Exemplo de problema multi-objetivo}
+			\label{fig:exemplo}
+		\end{figure}
+	\end{minipage}
 }
 
 \section{Distribuição Gaussiana}
