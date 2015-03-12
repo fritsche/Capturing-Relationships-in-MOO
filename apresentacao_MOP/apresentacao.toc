@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.24pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Otimiza\IeC {\c c}\IeC {\~a}o Multi-objetivo}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{O que \IeC {\'e} Otimiza\IeC {\c c}\IeC {\~a}o Multi-objetivo?}{2}{0}{1}
+\beamer@subsectionintoc {1}{2}{Exemplo de Figura}{5}{0}{1}

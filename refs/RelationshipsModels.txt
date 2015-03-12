@@ -1,0 +1,90 @@
+
+
+  Important concepts 
+
+  1) Univariate and multivariate distributions
+  -- What is a probability distribution?
+  -- What are univariate and multivariate distributions?
+  -- Examples of univariate and multivariate distributions? 
+
+  2) Dependence between two variables
+  -- When are two or more variables statistically dependent?
+  -- How can dependence between variables be learned?
+  -- Examples of measures of dependences between variables. 
+
+  3) Gaussian or normal distribution 
+  -- What is a Gaussian distribution?
+  -- What are Gaussian distributions useful for?
+  -- What are the differences between univariate and multivariate distributions?  
+
+  4) Probabilistic graphical model
+  -- What is a probabilistic graphical model ? 
+  -- What are probabilistic graphical models used for?
+  -- Examples of probabilistic graphical ? 
+
+  5) Black box optimization problem
+  -- What is a black-box optimization (BBO) problem?
+  -- Example of BBOs
+  -- How can a BBO be solved?
+
+  6) Multi-objective optimization problem
+  -- What is a multi-objective problem?
+  -- Example of multi-objective problems.
+  -- What is a solution of a multi-objective problem? 
+ 
+  7) Metaheuristics
+  -- What is a meta-heuristic?
+  -- What is a meta-heuristic useful for ?
+  -- Examples of meta-heuristics and problems to which they have been applied
+
+  8) Estimation of distribution algorithm (EDA)
+  -- What is an estimation of distribution algorithm?
+  -- What are EDAs useful for ?
+  -- What are the main differences between EDAs?
+
+
+
+ - Univariate and multivariate distributions
+    https://stat.duke.edu/courses/Spring01/sta103/lecture_notes/chp5notes.pdf
+    http://en.wikipedia.org/wiki/Univariate_analysis
+    http://en.wikipedia.org/wiki/Univariate_distribution
+ 
+ -  Correlations and dependence 
+    http://en.wikipedia.org/wiki/Correlation_and_dependence
+    http://en.wikipedia.org/wiki/Mutual_information
+    http://www3.nd.edu/~mclark19/learn/CorrelationComparison.pdf
+    http://mathbits.com/MathBits/TISection/Statistics2/correlation.htm
+
+
+ - Gaussian distributions
+    https://www3.nd.edu/~rwilliam/stats1/x21.pdf (Pages 1 and 2)
+    http://en.wikipedia.org/wiki/Multivariate_normal_distribution
+    http://en.wikipedia.org/wiki/Normal_distribution
+   
+ - Probabilistic graphical model
+    http://www.di.ens.fr/~fbach/courses/fall2013/lecture1.pdf  (Pages 1 and 2)
+    http://en.wikipedia.org/wiki/Graphical_model
+    http://www.cis.upenn.edu/~mkearns/papers/barbados/jordan-tut.pdf (Pages 1-11)
+
+ - Black box optimization problem 
+   http://archimedes.cheme.cmu.edu/?q=bbo
+   http://www.lix.polytechnique.fr/~dambrosio/blackbox_material/Cassioli_1.pdf
+   https://www.lri.fr/~hansen/copenhagen-optimization-intro.pdf (Pages 1-11)
+
+ - Multi-objective optimization problem
+   http://www.cs.bham.ac.uk/~durranrj/NID/documentCache/tutorial1/tutorial-slides-coello.pdf
+   http://www.lania.mx/~ccoello/EMOO/zitzler04.pdf.gz 
+   http://www.redcedartech.com/pdfs/MO-SHERPA_paper.pdf
+   http://www.sciencedirect.com/science/article/pii/S0951832005002012
+  
+ - Metaheuristics
+   http://www.thiagopradi.net/blog/2014/08/06/genetic-algorithms-in-ruby-introduction-to-metaheuristics/
+   http://www.rhydlewis.eu/talks/BCSLecture.pdf (Pages 1-12)
+   http://cs.gmu.edu/~sean/book/metaheuristics/Essentials.pdf
+   http://folk.uio.no/infheur/Bakgrunn/Metaheuristics_Gendreau_Potvin.pdf
+
+ - Estimation of distribution algorithm (EDA)
+   http://pt.wikipedia.org/wiki/Algoritmos_de_estima%C3%A7%C3%A3o_de_distribui%C3%A7%C3%A3o
+   http://www.ai-research.eu/courses/IntroductionToEDAs.pdf (Pages 1-10)
+   http://download.springer.com/static/pdf/77/chp%253A10.1007%252F978-3-540-72960-0_18.pdf?auth66=1424982888_d77741fded0890a7455eed507d6f45a4&ext=.pdf
+
