@@ -23,8 +23,8 @@
 package wekaexamples.attributeSelection;
 
 import weka.attributeSelection.AttributeSelection;
-import weka.attributeSelection.CfsSubsetEval;
-import weka.attributeSelection.GreedyStepwise;
+import weka.attributeSelection.PrincipalComponents;
+import weka.attributeSelection.Ranker;
 import weka.classifiers.Evaluation;
 import weka.classifiers.meta.AttributeSelectedClassifier;
 import weka.classifiers.trees.J48;
@@ -36,7 +36,7 @@ import weka.filters.Filter;
 import java.util.Random;
 
 /**
- * performs attribute selection using CfsSubsetEval and GreedyStepwise
+ * performs attribute selection using PrincipalComponents and Ranker
  * (backwards) and trains J48 with that. Needs 3.5.5 or higher to compile.
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
@@ -50,15 +50,11 @@ public class AttributeSelectionTest {
   protected static void useClassifier(Instances data) throws Exception {
     System.out.println("\n1. Meta-classfier");
     AttributeSelectedClassifier classifier = new AttributeSelectedClassifier();
-    CfsSubsetEval eval = new CfsSubsetEval();
-    GreedyStepwise search = new GreedyStepwise();
-    search.setSearchBackwards(true);
-    J48 base = new J48();
-    classifier.setClassifier(base);
+    PrincipalComponents eval = new PrincipalComponents();
+    Ranker search = new Ranker();
     classifier.setEvaluator(eval);
     classifier.setSearch(search);
     Evaluation evaluation = new Evaluation(data);
-    evaluation.crossValidateModel(classifier, data, 10, new Random(1));
     System.out.println(evaluation.toSummaryString());
   }
 
@@ -68,9 +64,8 @@ public class AttributeSelectionTest {
   protected static void useFilter(Instances data) throws Exception {
     System.out.println("\n2. Filter");
     weka.filters.supervised.attribute.AttributeSelection filter = new weka.filters.supervised.attribute.AttributeSelection();
-    CfsSubsetEval eval = new CfsSubsetEval();
-    GreedyStepwise search = new GreedyStepwise();
-    search.setSearchBackwards(true);
+    PrincipalComponents eval = new PrincipalComponents();
+    Ranker search = new Ranker();
     filter.setEvaluator(eval);
     filter.setSearch(search);
     filter.setInputFormat(data);
@@ -84,13 +79,13 @@ public class AttributeSelectionTest {
   protected static void useLowLevel(Instances data) throws Exception {
     System.out.println("\n3. Low-level");
     AttributeSelection attsel = new AttributeSelection();
-    CfsSubsetEval eval = new CfsSubsetEval();
-    GreedyStepwise search = new GreedyStepwise();
-    search.setSearchBackwards(true);
+    PrincipalComponents eval = new PrincipalComponents();
+    Ranker search = new Ranker();
     attsel.setEvaluator(eval);
     attsel.setSearch(search);
     attsel.SelectAttributes(data);
     int[] indices = attsel.selectedAttributes();
+    System.out.println("PrincipalComponent Summary:\n" + eval);
     System.out.println("selected attribute indices (starting with 0):\n" + Utils.arrayToString(indices));
   }
 
@@ -109,10 +104,10 @@ public class AttributeSelectionTest {
       data.setClassIndex(data.numAttributes() - 1);
 
     // 1. meta-classifier
-    useClassifier(data);
+    //useClassifier(data);
 
     // 2. filter
-    useFilter(data);
+    //useFilter(data);
 
     // 3. low-level
     useLowLevel(data);
