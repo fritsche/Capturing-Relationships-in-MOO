@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Otimiza\IeC {\c c}\IeC {\~a}o Multi-objetivo}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{O que \IeC {\'e} Otimiza\IeC {\c c}\IeC {\~a}o Multi-objetivo?}{2}{0}{1}
+\beamer@sectionintoc {2}{Distribui\IeC {\c c}\IeC {\~a}o Gaussiana}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{O que \IeC {\'e} Distribui\IeC {\c c}\IeC {\~a}o Gaussiana?}{5}{0}{2}
