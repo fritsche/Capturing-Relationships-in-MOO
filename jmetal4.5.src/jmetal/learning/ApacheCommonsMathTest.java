@@ -1,5 +1,7 @@
 /* apache commons math test */
 
+package jmetal.learning;
+
 public class ApacheCommonsMathTest {
 
 	public ApacheCommonsMathTest(){
