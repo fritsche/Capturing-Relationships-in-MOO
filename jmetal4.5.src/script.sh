@@ -16,7 +16,7 @@ else
 	rm *.aux
 	echo "running..."
 	#java jmetal.metaheuristics.singleObjective.cmaes.CMAES_main > output.txt
-	java -classpath ".:libs/commons-math3-3.4.1/commons-math3-3.4.1.jar" jmetal.learning.ApacheCommonsMathTest
+	java -classpath ".:libs/commons-math3-3.4.1/commons-math3-3.4.1.jar" jmetal.learning.SMPSOTest
 fi
 
 echo "done."
