@@ -22,6 +22,8 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;
 
 public class SMPSOTest {
 
+	private int n_vars = 0, n_objs = 0;
+
 	public SMPSOTest() throws ClassNotFoundException, JMException {
 		Algorithm algorithm = buildAlgorithm();
 
@@ -37,8 +39,18 @@ public class SMPSOTest {
 	    population.printVariablesToFile("SMPSOTest.VAR");   
 	}
 
+	protected void printHeader(){
+		for (int i = 1 ; i <= n_vars ; ++i ) {
+			System.out.print("\tVar" + i);
+		}
+		for (int i = 1 ; i <= n_objs ; ++i ) {
+			System.out.print("\tObj" + i);
+		}
+		System.out.println();
+	}
+
 	protected void correlationAnalisys(double [][] data){
-		System.out.println("\n\tVar_1\tVar_2\tVar_3\tVar_4\tVar_5\tVar_6\tObj_1\tObj_2");
+		printHeader();
 		printMatrix(data);
 		System.out.println();
 
@@ -46,34 +58,38 @@ public class SMPSOTest {
 		Covariance covariance = new Covariance(data);
 		RealMatrix matrix = covariance.getCovarianceMatrix();
 		double[][] result = matrix.getData();
+		printHeader();
 		printMatrix(result);
 		System.out.println();
 
 		System.out.println("Pearsons Correlation:");
 		double[][] pearsons = (new PearsonsCorrelation(data)).getCorrelationMatrix().getData();
+		printHeader();
 		printMatrix(pearsons);
 		System.out.println();
 
 		System.out.println("Spearmans Correlation:");
 		double[][] spearmans = (new SpearmansCorrelation()).computeCorrelationMatrix(data).getData();
+		printHeader();
 		printMatrix(spearmans);
 		System.out.println();
 
 		System.out.println("Kendalls Correlation:");
 		double[][] kendalls = (new KendallsCorrelation(data)).getCorrelationMatrix().getData();
+		printHeader();
 		printMatrix(kendalls);
 		System.out.println();
 	}
 
 	protected Algorithm buildAlgorithm() throws ClassNotFoundException, JMException {
-		Problem problem = new WFG1("Real");
+		Problem problem = new WFG1("Real", 4, 12, 5);
 		Algorithm algorithm = new SMPSO(problem);		
 		Mutation  mutation  ;  // "Turbulence" operator
 	    
 	    // Algorithm parameters
-	    algorithm.setInputParameter("swarmSize",100);
-	    algorithm.setInputParameter("archiveSize",100);
-	    algorithm.setInputParameter("maxIterations",250);
+	    algorithm.setInputParameter("swarmSize",400);
+	    algorithm.setInputParameter("archiveSize",400);
+	    algorithm.setInputParameter("maxIterations",1000);
 
 	    HashMap parameters = new HashMap() ;
 	    parameters.put("probability", 1.0/problem.getNumberOfVariables()) ;
@@ -88,10 +104,10 @@ public class SMPSOTest {
 	protected double[][] buildMatrixData(SolutionSet population) throws JMException {
 		int size = population.size();
 	    Solution aux = population.get(0);
-	    int nvars = aux.numberOfVariables();
-	    int nobjs = aux.getNumberOfObjectives();
+	    n_vars = aux.numberOfVariables();
+	    n_objs = aux.getNumberOfObjectives();
 
-		 double[][] data = new double[size][nvars + nobjs];
+		 double[][] data = new double[size][n_vars + n_objs];
 
 	    for (int i = 0; i<size ; ++i) {
 	    	Solution s = population.get(i);
@@ -99,7 +115,7 @@ public class SMPSOTest {
 	    	int j = 0;
 	    	for ( Variable v : vars )
 	    		data[i][j++] = v.getValue();
-	    	for (int k = 0; k < nobjs ; ++k)
+	    	for (int k = 0; k < n_objs ; ++k)
 	    		data[i][j++] = s.getObjective(k);
 	    }
 	    return data;
@@ -108,7 +124,7 @@ public class SMPSOTest {
 	protected void printMatrix(double[][] matrix){
 		for (double[] i : matrix) {
 			for (double j : i) {
-				String a = String.format("%.4f", j) ;
+				String a = String.format("%.3f", j) ;
 				System.out.print("\t" + a);
 			}
 			System.out.println();
