@@ -14,6 +14,7 @@ import jmetal.operators.mutation.Mutation;
 import jmetal.operators.mutation.MutationFactory;
 import jmetal.core.Solution;
 import jmetal.core.Variable;
+import jmetal.visualization.Visualization;
 import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.apache.commons.math3.stat.correlation.SpearmansCorrelation;
@@ -24,7 +25,10 @@ public class SMPSOTest {
 
 	private int n_vars = 0, n_objs = 0;
 
+	private Learning learning;
+
 	public SMPSOTest() throws ClassNotFoundException, JMException {
+
 		Algorithm algorithm = buildAlgorithm();
 
 	    // Execute the Algorithm 
@@ -32,11 +36,14 @@ public class SMPSOTest {
 	    SolutionSet population = algorithm.execute();
 	    long estimatedTime = System.currentTimeMillis() - initTime;
 
-		double [][] data = buildMatrixData(population);
-		correlationAnalisys(data);
+	  	learning = new Learning(population);
+		double[][] kendalls = learning.kendallsCorrelation();
+		Solution aux = population.get(0);
+	    n_vars = aux.numberOfVariables();
+	    n_objs = aux.getNumberOfObjectives();
 
-	    population.printObjectivesToFile("SMPSOTest.FUN");
-	    population.printVariablesToFile("SMPSOTest.VAR");   
+	    new Visualization("TESTE", n_vars, n_objs, kendalls, 0.3);
+
 	}
 
 	protected void printHeader(){
@@ -49,33 +56,28 @@ public class SMPSOTest {
 		System.out.println();
 	}
 
-	protected void correlationAnalisys(double [][] data){
-		printHeader();
-		printMatrix(data);
-		System.out.println();
-
+	protected void correlationAnalisys(){
+	
 		System.out.println("Covariance:");
-		Covariance covariance = new Covariance(data);
-		RealMatrix matrix = covariance.getCovarianceMatrix();
-		double[][] result = matrix.getData();
+		double[][] result = learning.covariance();
 		printHeader();
 		printMatrix(result);
 		System.out.println();
 
 		System.out.println("Pearsons Correlation:");
-		double[][] pearsons = (new PearsonsCorrelation(data)).getCorrelationMatrix().getData();
+		double[][] pearsons = learning.pearsonsCorrelation();
 		printHeader();
 		printMatrix(pearsons);
 		System.out.println();
 
 		System.out.println("Spearmans Correlation:");
-		double[][] spearmans = (new SpearmansCorrelation()).computeCorrelationMatrix(data).getData();
+		double[][] spearmans = learning.spearmansCorrelation();
 		printHeader();
 		printMatrix(spearmans);
 		System.out.println();
 
 		System.out.println("Kendalls Correlation:");
-		double[][] kendalls = (new KendallsCorrelation(data)).getCorrelationMatrix().getData();
+		double[][] kendalls = learning.kendallsCorrelation();
 		printHeader();
 		printMatrix(kendalls);
 		System.out.println();
@@ -87,9 +89,9 @@ public class SMPSOTest {
 		Mutation  mutation  ;  // "Turbulence" operator
 	    
 	    // Algorithm parameters
-	    algorithm.setInputParameter("swarmSize",400);
-	    algorithm.setInputParameter("archiveSize",400);
-	    algorithm.setInputParameter("maxIterations",1000);
+	    algorithm.setInputParameter("swarmSize",1000);
+	    algorithm.setInputParameter("archiveSize",1000);
+	    algorithm.setInputParameter("maxIterations",2500);
 
 	    HashMap parameters = new HashMap() ;
 	    parameters.put("probability", 1.0/problem.getNumberOfVariables()) ;
