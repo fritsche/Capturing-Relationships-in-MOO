@@ -42,7 +42,7 @@ public class SMPSOTest {
 	    n_vars = aux.numberOfVariables();
 	    n_objs = aux.getNumberOfObjectives();
 
-	    new Visualization("TESTE", n_vars, n_objs, kendalls, 0.3);
+	    new Visualization("TESTE", n_vars, n_objs, kendalls, 0.5);
 
 	}
 
@@ -89,9 +89,9 @@ public class SMPSOTest {
 		Mutation  mutation  ;  // "Turbulence" operator
 	    
 	    // Algorithm parameters
-	    algorithm.setInputParameter("swarmSize",1000);
-	    algorithm.setInputParameter("archiveSize",1000);
-	    algorithm.setInputParameter("maxIterations",2500);
+	    algorithm.setInputParameter("swarmSize",100);
+	    algorithm.setInputParameter("archiveSize",100);
+	    algorithm.setInputParameter("maxIterations",250);
 
 	    HashMap parameters = new HashMap() ;
 	    parameters.put("probability", 1.0/problem.getNumberOfVariables()) ;
