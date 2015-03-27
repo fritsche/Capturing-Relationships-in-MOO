@@ -13,7 +13,7 @@ import org.apache.commons.math3.stat.correlation.SpearmansCorrelation;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.stat.correlation.KendallsCorrelation;
 
-import JavaMI.MutualInformation;
+//import JavaMI.MutualInformation;
 
 public class Learning {
 

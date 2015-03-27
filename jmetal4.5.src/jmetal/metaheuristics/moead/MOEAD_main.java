@@ -96,8 +96,9 @@ public class MOEAD_main {
       //problem = new OKA2("Real") ;
     } // else
 
-    algorithm = new MOEAD(problem);
+    //algorithm = new MOEAD(problem);
     //algorithm = new MOEAD_DRA(problem);
+    algorithm = new SplittedMOEAD_DRA(problem);
     
     // Algorithm parameters
     algorithm.setInputParameter("populationSize",300);

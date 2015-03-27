@@ -4,6 +4,8 @@ package jmetal.learning;
 
 import jmetal.core.Algorithm;
 import jmetal.metaheuristics.smpso.SMPSO;
+import jmetal.metaheuristics.moead.SplittedMOEAD_DRA;
+import jmetal.core.Operator;
 import jmetal.core.Problem;
 import jmetal.problems.WFG.WFG1;
 import jmetal.core.SolutionSet;
@@ -11,6 +13,7 @@ import jmetal.util.JMException;
 import java.io.IOException; // ClassNotFoundException
 import java.util.HashMap;
 import jmetal.operators.mutation.Mutation;
+import jmetal.operators.crossover.CrossoverFactory;
 import jmetal.operators.mutation.MutationFactory;
 import jmetal.core.Solution;
 import jmetal.core.Variable;
@@ -42,7 +45,7 @@ public class SMPSOTest {
 	    n_vars = aux.numberOfVariables();
 	    n_objs = aux.getNumberOfObjectives();
 
-	    new Visualization("TESTE", n_vars, n_objs, kendalls, 0.5);
+	    new Visualization("WFG1", n_vars, n_objs, kendalls, 0.3);
 
 	}
 
@@ -85,20 +88,43 @@ public class SMPSOTest {
 
 	protected Algorithm buildAlgorithm() throws ClassNotFoundException, JMException {
 		Problem problem = new WFG1("Real", 4, 12, 5);
-		Algorithm algorithm = new SMPSO(problem);		
+		Algorithm algorithm = new SplittedMOEAD_DRA(problem);		
 		Mutation  mutation  ;  // "Turbulence" operator
 	    
 	    // Algorithm parameters
+	    /* SMPSO
 	    algorithm.setInputParameter("swarmSize",100);
 	    algorithm.setInputParameter("archiveSize",100);
-	    algorithm.setInputParameter("maxIterations",250);
+	    algorithm.setInputParameter("maxIterations",250); 
+		*/
 
-	    HashMap parameters = new HashMap() ;
+	    algorithm.setInputParameter("populationSize",1000);
+	    algorithm.setInputParameter("maxEvaluations",150000);
+	    algorithm.setInputParameter("dataDirectory", "./weightVectors");
+
+		algorithm.setInputParameter("finalSize", 300) ; // used by MOEAD_DRA
+
+	    algorithm.setInputParameter("T", 20) ;
+	    algorithm.setInputParameter("delta", 0.9) ;
+	    algorithm.setInputParameter("nr", 2) ;
+
+	    HashMap  parameters ; // Operator parameters
+	    Operator  crossover ; 
+	    // Crossover operator 
+	    parameters = new HashMap() ;
+	    parameters.put("CR", 1.0) ;
+	    parameters.put("F", 0.5) ;
+	    crossover = CrossoverFactory.getCrossoverOperator("DifferentialEvolutionCrossover", parameters);                   
+	    
+	    // Mutation operator
+	    parameters = new HashMap() ;
 	    parameters.put("probability", 1.0/problem.getNumberOfVariables()) ;
 	    parameters.put("distributionIndex", 20.0) ;
 	    mutation = MutationFactory.getMutationOperator("PolynomialMutation", parameters);                    
-
-	    algorithm.addOperator("mutation", mutation);
+	    
+	    algorithm.addOperator("crossover",crossover);
+	    algorithm.addOperator("mutation",mutation);
+	    
 
 	    return algorithm;
 	}
