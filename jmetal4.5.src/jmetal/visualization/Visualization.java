@@ -133,7 +133,7 @@ public class Visualization extends JFrame {
 		style.put(mxConstants.STYLE_STROKEWIDTH, Math.abs(value)*20);
         style.put(mxConstants.STYLE_EDGE,mxConstants.SHAPE_CONNECTOR);
         stylesheet.putCellStyle(Double.toString(value), style);
-        graph.insertEdge(parent, null, " ", nodes.get(startNode), nodes.get(endNode),Double.toString(value));
+        graph.insertEdge(parent, null, String.valueOf(value).subSequence(0, 5),nodes.get(startNode), nodes.get(endNode),Double.toString(value));
 	}
 	
 }
