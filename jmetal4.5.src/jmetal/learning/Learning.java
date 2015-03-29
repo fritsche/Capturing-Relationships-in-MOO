@@ -10,10 +10,9 @@ import jmetal.core.Variable;
 import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.apache.commons.math3.stat.correlation.SpearmansCorrelation;
-import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.stat.correlation.KendallsCorrelation;
 
-//import JavaMI.MutualInformation;
+import JavaMI.MutualInformation;
 
 public class Learning {
 
@@ -61,26 +60,34 @@ public class Learning {
 		return (new KendallsCorrelation(data)).getCorrelationMatrix().getData();
 	}
 	
-//	public double [][] mutualInformation(){
-//		MutualInformation mi;
-//		int total = n_objs + n_vars;
-//		double[][] newMatrix = new double[size][total];
-//		
-//		double[] v1 = new double[size];
-//		double[] v2 = new double[size];
-//		int i = 0,j = 0;
-//		for(int k = 0;k<total;k++){
-//			for(j = 0; j < size; j++){
-//				v1[j] = data[j][i];
-//			}
-//		
-//			for(j = 0; j < size; j++){
-//				v2[j] = data[j][i];		
-//			}
+	public double [][] mutualInformation(){
+		int total = n_objs + n_vars;
+		
+		/*Inicialização da nova matriz com 0*/
+		double[][] newMatrix = new double[total][total];
+		for(int a = 0; a < total; a++){
+			for(int b = 0; b < total; b++){
+				newMatrix[a][b] = 0;
+			}
+		}
+			
+		double[] v1 = new double[size];
+		double[] v2 = new double[size];
+		for(int k = 0;k<total;k++){
+			for(int l = k+1;l<total;l++){
+				for(int j = 0; j < size; j++){
+					v1[j] = data[j][k];
+				}
+				for(int j = 0; j < size; j++){
+					v2[j] = data[j][l];		
+				}
 	
-			/*guarda os valores na matriz com o valor da mutual information entre 2 variaveis*/
-//			newMatrix[][] = mi.calculateMutualInformation(v1,v2);
-//		}
-//		return ;
-//	}
+				/*guarda os valores na matriz com o valor da mutual information entre 2 variaveis*/
+				double res = MutualInformation.calculateMutualInformation(v1,v2);
+				newMatrix[k][l] = res;
+				newMatrix[l][k] = res;
+			}
+		}
+		return newMatrix;
+	}
 }

@@ -41,12 +41,13 @@ public class SMPSOTest {
 
 	  	learning = new Learning(population);
 		double[][] kendalls = learning.kendallsCorrelation();
-		Solution aux = population.get(0);
+		//double[][] mutualInf = learning.mutualInformation();
+	  	Solution aux = population.get(0);
 	    n_vars = aux.numberOfVariables();
 	    n_objs = aux.getNumberOfObjectives();
 
 	    new Visualization("WFG1", n_vars, n_objs, kendalls, 0.3);
-
+	    //new Visualization("WFG1", n_vars, n_objs, mutualInf, 0.7);
 	}
 
 	protected void printHeader(){
