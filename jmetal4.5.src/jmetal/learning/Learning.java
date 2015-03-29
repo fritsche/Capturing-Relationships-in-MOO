@@ -64,7 +64,7 @@ public class Learning {
 //	public double [][] mutualInformation(){
 //		MutualInformation mi;
 //		int total = n_objs + n_vars;
-//		double[][] 
+//		double[][] newMatrix = new double[size][total];
 //		
 //		double[] v1 = new double[size];
 //		double[] v2 = new double[size];
@@ -77,7 +77,9 @@ public class Learning {
 //			for(j = 0; j < size; j++){
 //				v2[j] = data[j][i];		
 //			}
-//			mi.calculateMutualInformation(v1,v2);
+	
+			/*guarda os valores na matriz com o valor da mutual information entre 2 variaveis*/
+//			newMatrix[][] = mi.calculateMutualInformation(v1,v2);
 //		}
 //		return ;
 //	}
