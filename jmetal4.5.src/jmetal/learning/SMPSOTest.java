@@ -32,14 +32,25 @@ public class SMPSOTest {
 
 	public SMPSOTest() throws ClassNotFoundException, JMException {
 
-		Algorithm algorithm = buildAlgorithm();
+		SplittedMOEAD_DRA algorithm = (SplittedMOEAD_DRA) buildAlgorithm();
 
 	    // Execute the Algorithm 
-	    long initTime = System.currentTimeMillis();
-	    SolutionSet population = algorithm.execute();
-	    long estimatedTime = System.currentTimeMillis() - initTime;
+	    SolutionSet population;
+	   	algorithm.initialize();
+	   	int gen=0;
+	    do {
+	      population = algorithm.executeIteration();
+	      System.out.println(gen++);
+	      if (gen%100 == 0) {
+	      	runLearning(population);
+	      }
+	    } while (!algorithm.isStopConditionSatisfied());
+	 	population = algorithm.postExecution();
+		runLearning(population);
+  	}
 
-	  	learning = new Learning(population);
+	protected void runLearning(SolutionSet population) throws JMException {
+		learning = new Learning(population);
 		double[][] kendalls = learning.kendallsCorrelation();
 		//double[][] mutualInf = learning.mutualInformation();
 	  	Solution aux = population.get(0);

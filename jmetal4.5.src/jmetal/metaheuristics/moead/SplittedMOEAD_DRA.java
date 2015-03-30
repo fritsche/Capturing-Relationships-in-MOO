@@ -108,7 +108,7 @@ public class SplittedMOEAD_DRA extends Algorithm {
    	initialize();
     do {
       executeIteration();
-    } while (evaluations_ < maxEvaluations);
+    } while (!isStopConditionSatisfied());
  	return postExecution();
   }
 
@@ -622,6 +622,10 @@ public class SplittedMOEAD_DRA extends Algorithm {
 	      
 	    }    
 	    return finalSelection(final_size); 
+   }
+
+   public boolean isStopConditionSatisfied(){
+    return !(evaluations_ < maxEvaluations);
    }
 
 } // SplittedMOEAD_DRA
