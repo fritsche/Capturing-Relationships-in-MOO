@@ -14,11 +14,14 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;
 
 import JavaMI.MutualInformation;
 
+import java.io.PrintWriter;
+import java.io.FileWriter;
+
 public class Learning {
 
 	private int n_vars, n_objs;
 	private double[][] data;
-	//ver se vai dar problemas??
+	private double[][] result;
 	private int size;
 
 	Learning (SolutionSet population) throws JMException {
@@ -45,19 +48,23 @@ public class Learning {
 	}
 
 	public double [][] covariance () {
-		return (new Covariance(data)).getCovarianceMatrix().getData();
+		result = (new Covariance(data)).getCovarianceMatrix().getData();
+		return result;
 	} 
 
 	public double [][] pearsonsCorrelation () {
-		return (new PearsonsCorrelation(data)).getCorrelationMatrix().getData();
+		result = (new PearsonsCorrelation(data)).getCorrelationMatrix().getData();
+		return result;
 	}
 
 	public double [][] spearmansCorrelation () {
-		return (new SpearmansCorrelation()).computeCorrelationMatrix(data).getData();
+		result = (new SpearmansCorrelation()).computeCorrelationMatrix(data).getData();
+		return result;
 	}
 
 	public double [][] kendallsCorrelation () {
-		return (new KendallsCorrelation(data)).getCorrelationMatrix().getData();
+		result = (new KendallsCorrelation(data)).getCorrelationMatrix().getData();
+		return result;
 	}
 	
 	public double [][] mutualInformation(){
@@ -88,6 +95,26 @@ public class Learning {
 				newMatrix[l][k] = res;
 			}
 		}
-		return newMatrix;
+		result = newMatrix;
+		return result;
+	}
+
+	public void printToFile(String file ) {
+
+		try {
+			FileWriter writer = new FileWriter(file);
+			PrintWriter print = new PrintWriter(writer);
+
+			for (double[] dd : result) {
+				for (double d : dd) {
+					print.printf("%f\t",d);
+				}
+				print.println();
+			}
+
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

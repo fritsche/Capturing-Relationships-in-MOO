@@ -15,18 +15,31 @@ import java.util.Map;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import com.mxgraph.util.mxCellRenderer;
+import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
 
-public class Visualization extends JFrame {
+public class Visualization extends JFrame implements ActionListener {
 	
-	Hashtable<String, Object> baseStyle = new Hashtable<String, Object>();
-    mxStylesheet stylesheet;
-    mxGraph graph = new mxGraph();
-	Object parent = graph.getDefaultParent();
-	Map<Object, Object> nodes = new HashMap<Object, Object>();
-	
+	private Hashtable<String, Object> baseStyle = new Hashtable<String, Object>();
+    private mxStylesheet stylesheet;
+    private mxGraph graph = new mxGraph();
+	private Object parent = graph.getDefaultParent();
+	private Map<Object, Object> nodes = new HashMap<Object, Object>();
+	private JButton print;
+	private String title;
+
 	public Visualization(String title, int vars, int objs, double[][] data, double threshold) {
 		super(title);
-		
+		this.title = title;
+		this.setLayout(new BorderLayout());
 		baseStyle.put(mxConstants.STYLE_STROKECOLOR, "#000000");
 		stylesheet = graph.getStylesheet();	
 		int v = 0;
@@ -39,13 +52,13 @@ public class Visualization extends JFrame {
         Hashtable<String, Object> styleV = new Hashtable<String, Object>(baseStyle);
         Hashtable<String, Object> styleO = new Hashtable<String, Object>(baseStyle);
         
-        styleV.put(mxConstants.STYLE_FILLCOLOR, "#00FF00");
+        styleV.put(mxConstants.STYLE_FILLCOLOR, "#66FF66");
         styleV.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
         styleV.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
         styleV.put(mxConstants.STYLE_FONTCOLOR, "#000000");
         stylesheet.putCellStyle("variable", styleV);
 
-        styleO.put(mxConstants.STYLE_FILLCOLOR, "#FFFF00");
+        styleO.put(mxConstants.STYLE_FILLCOLOR, "#FFFF66");
         styleO.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
         styleO.put(mxConstants.STYLE_FONTCOLOR, "#000000");
         styleO.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
@@ -117,9 +130,13 @@ public class Visualization extends JFrame {
 		}
 
 		mxGraphComponent graphComponent = new mxGraphComponent(graph);
-		getContentPane().add(graphComponent);
+		this.add(graphComponent, BorderLayout.CENTER);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		print = new JButton("Print");
+		print.addActionListener(this);
+		this.add(print, BorderLayout.SOUTH);
+
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700, 700);
 		setVisible(true);
 	}
@@ -128,9 +145,9 @@ public class Visualization extends JFrame {
 	    Hashtable<String, Object> style = new Hashtable<String, Object>(baseStyle);
 
 		if(value > 0){
-			style.put(mxConstants.STYLE_STROKECOLOR, "#0000FF");
+			style.put(mxConstants.STYLE_STROKECOLOR, "#6666FF");
 		}else{
-			style.put(mxConstants.STYLE_STROKECOLOR, "#FF0000");
+			style.put(mxConstants.STYLE_STROKECOLOR, "#FF6666");
 		}
 		style.put(mxConstants.STYLE_STROKEWIDTH, Math.abs(value)*10);
         style.put(mxConstants.STYLE_EDGE,mxConstants.SHAPE_CONNECTOR);
@@ -139,4 +156,14 @@ public class Visualization extends JFrame {
         graph.insertEdge(parent, null, String.valueOf(value).subSequence(0, 5),nodes.get(startNode), nodes.get(endNode),Double.toString(value));
 	}
 	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		try {
+			BufferedImage image = mxCellRenderer.createBufferedImage(graph, null, 1, Color.WHITE, true, null);
+			ImageIO.write(image, "PNG", new File("img/"+title+".png"));
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+	}
+
 }

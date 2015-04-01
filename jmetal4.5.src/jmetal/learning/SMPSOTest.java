@@ -30,20 +30,22 @@ public class SMPSOTest {
 
 	private Learning learning;
 
-	public SMPSOTest() throws ClassNotFoundException, JMException {
+	int gen;
+
+	public SMPSOTest() throws ClassNotFoundException, JMException  {
 
 		SplittedMOEAD_DRA algorithm = (SplittedMOEAD_DRA) buildAlgorithm();
 
 	    // Execute the Algorithm 
 	    SolutionSet population;
 	   	algorithm.initialize();
-	   	int gen=0;
+	   	gen=0;
 	    do {
 	      population = algorithm.executeIteration();
-	      System.out.println(gen++);
-	      if (gen%100 == 0) {
+	      if (gen%26 == 0) {
 	      	runLearning(population);
 	      }
+	      System.out.println(gen++);
 	    } while (!algorithm.isStopConditionSatisfied());
 	 	population = algorithm.postExecution();
 		runLearning(population);
@@ -52,12 +54,13 @@ public class SMPSOTest {
 	protected void runLearning(SolutionSet population) throws JMException {
 		learning = new Learning(population);
 		double[][] kendalls = learning.kendallsCorrelation();
+		learning.printToFile("out/"+Integer.toString(gen)+".txt");
 		//double[][] mutualInf = learning.mutualInformation();
 	  	Solution aux = population.get(0);
 	    n_vars = aux.numberOfVariables();
 	    n_objs = aux.getNumberOfObjectives();
 
-	    new Visualization("WFG1", n_vars, n_objs, kendalls, 0.3);
+	    new Visualization(Integer.toString(gen), n_vars, n_objs, kendalls, 0.4);
 	    //new Visualization("WFG1", n_vars, n_objs, mutualInf, 0.7);
 	}
 
@@ -171,7 +174,7 @@ public class SMPSOTest {
 		}
 	}
 
-	public static void main(String[] args) throws ClassNotFoundException, JMException {
+	public static void main(String[] args) throws ClassNotFoundException, JMException  {
 		new SMPSOTest();
 	}
 
