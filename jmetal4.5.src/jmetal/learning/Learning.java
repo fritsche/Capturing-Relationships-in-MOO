@@ -99,7 +99,7 @@ public class Learning {
 		return result;
 	}
 
-	public void printToFile(String file ) {
+	public void printToFileDouble(String file) {
 
 		try {
 			FileWriter writer = new FileWriter(file);
@@ -108,6 +108,29 @@ public class Learning {
 			for (double[] dd : result) {
 				for (double d : dd) {
 					print.printf("%f\t",d);
+				}
+				print.println();
+			}
+
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void printToFileBin(double limiar,String file) {
+
+		try {
+			FileWriter writer = new FileWriter(file);
+			PrintWriter print = new PrintWriter(writer);
+
+			for (double[] dd : result) {
+				for (double d : dd) {
+					if(d > Math.abs(limiar)){
+						print.printf("%d\t",1);
+					}else{
+						print.printf("%d\t",0);
+					}
 				}
 				print.println();
 			}

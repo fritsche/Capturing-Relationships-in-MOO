@@ -26,41 +26,61 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;
 
 public class SMPSOTest {
 
-	private int n_vars = 0, n_objs = 0;
-
+	private int n_vars = 0, n_objs = 0, qntExecucoes = 30;
+	private double limiar = 0.3;
 	private Learning learning;
+	private String Kendalls = "Kendalls";
+	private String Pearsons = "Pearsons";
+	private String Spearmans = "Spearmans";
+	
 
+	
 	int gen;
+	int i;
 
 	public SMPSOTest() throws ClassNotFoundException, JMException  {
 
 		SplittedMOEAD_DRA algorithm = (SplittedMOEAD_DRA) buildAlgorithm();
 
 	    // Execute the Algorithm 
-	    SolutionSet population;
-	   	algorithm.initialize();
-	   	gen=0;
-	    do {
-	      population = algorithm.executeIteration();
-	      if (gen%26 == 0) {
-	      	runLearning(population);
-	      }
-	      System.out.println(gen++);
-	    } while (!algorithm.isStopConditionSatisfied());
-	 	population = algorithm.postExecution();
-		runLearning(population);
+		for(i = 1; i <= qntExecucoes; i++){
+			SolutionSet population;
+		   	algorithm.initialize();
+		   	gen=0;
+		    do {
+		      population = algorithm.executeIteration();
+		      if (gen%26 == 0) {
+		      	runLearning(population);
+		      }
+		      System.out.println(gen++);
+		    } while (!algorithm.isStopConditionSatisfied());
+		 	population = algorithm.postExecution();
+			runLearning(population);
+		}
   	}
 
 	protected void runLearning(SolutionSet population) throws JMException {
 		learning = new Learning(population);
-		double[][] kendalls = learning.kendallsCorrelation();
-		learning.printToFile("out/"+Integer.toString(gen)+".txt");
-		//double[][] mutualInf = learning.mutualInformation();
-	  	Solution aux = population.get(0);
-	    n_vars = aux.numberOfVariables();
-	    n_objs = aux.getNumberOfObjectives();
 
-	    new Visualization(Integer.toString(gen), n_vars, n_objs, kendalls, 0.4);
+		//double[][] kendalls = learning.kendallsCorrelation();
+		//learning.printToFileDouble("out/"+Kendalls+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+		//learning.printToFileBin(limiar,"out/"+Kendalls+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+		
+		//double[][] spearmans = learning.spearmansCorrelation();
+		//learning.printToFileDouble("out/"+Spearmans+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+		//learning.printToFileBin(limiar,"out/"+Spearmans+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+		
+		
+		double[][] pearsons = learning.pearsonsCorrelation();
+		learning.printToFileDouble("out/"+Pearsons+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+		learning.printToFileBin(limiar,"out/"+Pearsons+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+		
+		//double[][] mutualInf = learning.mutualInformation();
+		Solution aux = population.get(0);
+		n_vars = aux.numberOfVariables();
+		n_objs = aux.getNumberOfObjectives();
+		
+	    //new Visualization(Integer.toString(gen), n_vars, n_objs, kendalls, limiar);
 	    //new Visualization("WFG1", n_vars, n_objs, mutualInf, 0.7);
 	}
 

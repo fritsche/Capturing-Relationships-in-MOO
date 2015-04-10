@@ -25,7 +25,7 @@
 **
 *******************************************************************************/
 
-package JavaMI;
+package libs.JavaMI.JavaMI;
 
 import java.util.HashMap;
 import java.util.Set;

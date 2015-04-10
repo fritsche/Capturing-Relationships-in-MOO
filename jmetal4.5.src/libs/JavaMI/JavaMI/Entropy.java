@@ -25,7 +25,7 @@
 **
 *******************************************************************************/
 
-package JavaMI;
+package libs.JavaMI.JavaMI;
 
 /**
  * Implements common discrete Shannon Entropy functions.
