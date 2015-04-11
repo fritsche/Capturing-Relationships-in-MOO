@@ -126,7 +126,7 @@ public class Learning {
 
 			for (double[] dd : result) {
 				for (double d : dd) {
-					if(d > Math.abs(limiar)){
+					if(Math.abs(d) > limiar){
 						print.printf("1\t");
 					}else{
 						print.printf("0\t");

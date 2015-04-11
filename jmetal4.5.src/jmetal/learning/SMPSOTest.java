@@ -44,15 +44,16 @@ public class SMPSOTest {
 
 	    // Execute the Algorithm 
 		for(i = 1; i <= qntExecucoes; i++){
-			SolutionSet population;
+			System.out.println("Execution: "+i);
+		    SolutionSet population;
 		   	algorithm.initialize();
 		   	gen=0;
-		    do {
+		   	do {
 		      population = algorithm.executeIteration();
 		      if (gen%26 == 0) {
 		      	runLearning(population);
 		      }
-		      System.out.println(gen++);
+		      gen++;
 		    } while (!algorithm.isStopConditionSatisfied());
 		 	population = algorithm.postExecution();
 			runLearning(population);
@@ -60,6 +61,7 @@ public class SMPSOTest {
   	}
 
 	protected void runLearning(SolutionSet population) throws JMException {
+		System.out.println(gen);
 		learning = new Learning(population);
 		double[][] result;
 
