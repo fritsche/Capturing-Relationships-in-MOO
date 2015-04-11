@@ -61,17 +61,18 @@ public class SMPSOTest {
 
 	protected void runLearning(SolutionSet population) throws JMException {
 		learning = new Learning(population);
+		double[][] result;
 
-		//double[][] kendalls = learning.kendallsCorrelation();
-		//learning.printToFileDouble("out/"+Kendalls+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
-		//learning.printToFileBin(limiar,"out/"+Kendalls+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+ 		result = learning.kendallsCorrelation();
+		learning.printToFileDouble("out/"+Kendalls+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+		learning.printToFileBin(limiar,"out/"+Kendalls+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
 		
-		//double[][] spearmans = learning.spearmansCorrelation();
-		//learning.printToFileDouble("out/"+Spearmans+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
-		//learning.printToFileBin(limiar,"out/"+Spearmans+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+		result =  learning.spearmansCorrelation();
+		learning.printToFileDouble("out/"+Spearmans+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+		learning.printToFileBin(limiar,"out/"+Spearmans+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
 		
 		
-		double[][] pearsons = learning.pearsonsCorrelation();
+		result = learning.pearsonsCorrelation();
 		learning.printToFileDouble("out/"+Pearsons+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
 		learning.printToFileBin(limiar,"out/"+Pearsons+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
 		

@@ -16,7 +16,7 @@ cd ../../../
 echo "loading java files..."
 find -name "*.java" > sources.aux
 echo "compiling..."
-javac -classpath ".:libs/commons-math3-3.4.1/commons-math3-3.4.1.jar:libs/jgraphx/jgraphx.jar" @sources.aux
+javac -classpath ".:libs/commons-math3-3.4.1/commons-math3-3.4.1.jar:libs/jgraphx/jgraphx.jar:libs/JavaMI/JavaMI.jar" @sources.aux
 #if error
 if ! [ $? -eq 0 ]; then
 	echo "COMPILATION ERROR!"
@@ -24,7 +24,7 @@ else
 	echo "removing aux files..."
 	rm *.aux
 	echo "running..."
-	java -classpath ".:libs/commons-math3-3.4.1/commons-math3-3.4.1.jar:libs/jgraphx/jgraphx.jar" jmetal.learning.SMPSOTest
+	java -classpath ".:libs/commons-math3-3.4.1/commons-math3-3.4.1.jar:libs/jgraphx/jgraphx.jar:libs/JavaMI/JavaMI.jar" jmetal.learning.SMPSOTest
 fi
 
 echo "done."
