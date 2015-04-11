@@ -127,9 +127,9 @@ public class Learning {
 			for (double[] dd : result) {
 				for (double d : dd) {
 					if(d > Math.abs(limiar)){
-						print.printf("%d\t",1);
+						print.printf("1\t");
 					}else{
-						print.printf("%d\t",0);
+						print.printf("0\t");
 					}
 				}
 				print.println();
