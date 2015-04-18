@@ -24,7 +24,8 @@ else
 	echo "removing aux files..."
 	rm *.aux
 	echo "running..."
-	java -classpath ".:libs/commons-math3-3.4.1/commons-math3-3.4.1.jar:libs/jgraphx/jgraphx.jar:libs/JavaMI/JavaMI.jar" jmetal.learning.SMPSOTest
+	java -classpath ".:libs/commons-math3-3.4.1/commons-math3-3.4.1.jar:libs/jgraphx/jgraphx.jar:libs/JavaMI/JavaMI.jar" jmetal.learning.WFG1Real
+#	java -classpath ".:libs/commons-math3-3.4.1/commons-math3-3.4.1.jar:libs/jgraphx/jgraphx.jar:libs/JavaMI/JavaMI.jar" jmetal.learning.SMPSOTest
 fi
 
 echo "done."

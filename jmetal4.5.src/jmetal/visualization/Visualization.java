@@ -153,7 +153,11 @@ public class Visualization extends JFrame implements ActionListener {
         style.put(mxConstants.STYLE_EDGE,mxConstants.SHAPE_CONNECTOR);
         style.put(mxConstants.STYLE_FONTCOLOR,"#000000");
         stylesheet.putCellStyle(Double.toString(value), style);
-        graph.insertEdge(parent, null, String.valueOf(value).subSequence(0, 5),nodes.get(startNode), nodes.get(endNode),Double.toString(value));
+        String aux = String.valueOf(value);
+        if (aux.length()>=5){
+        	aux = aux.subSequence(0, 5).toString();
+        }
+        graph.insertEdge(parent, null, aux ,nodes.get(startNode), nodes.get(endNode),Double.toString(value));
 	}
 	
 	@Override
