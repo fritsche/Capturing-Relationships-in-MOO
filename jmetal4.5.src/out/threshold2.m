@@ -22,6 +22,7 @@ J = (I > limiar);
 save Kendalls.txt J
 
 % Pearsons
+I = zeros(21, 21);
 for i = 1:30
 	i
 	for j = 0:26:745
@@ -40,6 +41,7 @@ J = (I > limiar);
 save Pearsons.txt J
 
 % Spearmans
+I = zeros(21, 21);
 for i = 1:30
 	i
 	for j = 0:26:745
