@@ -1,6 +1,6 @@
 % threshold3.m
 
-limiar=(30 * 0.4)
+limiar=(30 * 0.3)
 
 % Kendalls
 for j = 0:26:745

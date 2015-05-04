@@ -1,4 +1,4 @@
-% run.m
+% execute.m
 
 update_bin
 threshold2

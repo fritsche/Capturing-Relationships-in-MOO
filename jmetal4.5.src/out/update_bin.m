@@ -1,6 +1,6 @@
 % update_bin.m
 
-limiar=0.3
+limiar=0.25
 
 % Kendalls
 for i = 1:30

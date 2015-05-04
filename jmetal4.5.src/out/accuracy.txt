@@ -1,10 +1,10 @@
-GNU Octave, version 3.8.2
+GNU Octave, version 3.8.1
 Copyright (C) 2014 John W. Eaton and others.
 This is free software; see the source code for copying conditions.
 There is ABSOLUTELY NO WARRANTY; not even for MERCHANTABILITY or
 FITNESS FOR A PARTICULAR PURPOSE.  For details, type 'warranty'.
 
-Octave was configured for "x86_64-unknown-linux-gnu".
+Octave was configured for "x86_64-pc-linux-gnu".
 
 Additional information about Octave is available at http://www.octave.org.
 
@@ -15,23 +15,23 @@ Read http://www.octave.org/bugs.html to learn how to submit bug reports.
 For information about changes from previous versions, type 'news'.
 
 ans = Kendalls
-TP =  5
-TN =  188
-FP = 0
-FN =  17
-sen =  0.22727
-spe =  1
+TP =  7
+TN =  119
+FP =  1
+FN =  83
+sen =  0.077778
+spe =  0.99167
 ans = Pearsons
-TP =  10
-TN =  188
-FP = 0
-FN =  12
-sen =  0.45455
-spe =  1
+TP =  17
+TN =  80
+FP =  40
+FN =  73
+sen =  0.18889
+spe =  0.66667
 ans = Spearmans
-TP =  6
-TN =  186
-FP =  2
-FN =  16
-sen =  0.27273
-spe =  0.98936
+TP =  13
+TN =  95
+FP =  25
+FN =  77
+sen =  0.14444
+spe =  0.79167

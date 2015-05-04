@@ -100,6 +100,7 @@ hold on;
 plot(base, ssen, 'g-o');
 plot(base, psen, 'b-*');
 legend("Kendalls", "Spearmans", "Pearsons");
+legend location northwest
 xlabel ("it");
 ylabel ("sen");
 print -dtex sen.tex
