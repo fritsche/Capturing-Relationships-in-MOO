@@ -1,6 +1,6 @@
 % threshold.m
 
-limiar=(900 * 0.2)
+limiar=(900 * 0.20)
 I = zeros(21, 21);
 
 % Kendalls
