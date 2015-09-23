@@ -3,21 +3,27 @@
 package jmetal.learning;
 
 import jmetal.core.Algorithm;
+import jmetal.metaheuristics.nsgaII.*;
 import jmetal.metaheuristics.smpso.SMPSO;
 import jmetal.metaheuristics.moead.SplittedMOEAD_DRA;
 import jmetal.core.Operator;
 import jmetal.core.Problem;
 import jmetal.problems.WFG.WFG1;
+import jmetal.qualityIndicator.QualityIndicator;
 import jmetal.core.SolutionSet;
 import jmetal.util.JMException;
+
 import java.io.IOException; // ClassNotFoundException
 import java.util.HashMap;
+
 import jmetal.operators.mutation.Mutation;
 import jmetal.operators.crossover.CrossoverFactory;
 import jmetal.operators.mutation.MutationFactory;
+import jmetal.operators.selection.SelectionFactory;
 import jmetal.core.Solution;
 import jmetal.core.Variable;
 import jmetal.visualization.Visualization;
+
 import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.apache.commons.math3.stat.correlation.SpearmansCorrelation;
@@ -28,7 +34,7 @@ public class SMPSOTest {
 
 	private int n_vars = 0, n_objs = 0, qntExecucoes = 1, split = 26;
 	private String output = "visualization"; // "visualization" or "file", for no output use any other string
-	private double limiar = 0.3;
+	private double threshold = 0.3;
 	private Learning learning;
 	private String Kendalls = "Kendalls";
 	private String Pearsons = "Pearsons";
@@ -42,11 +48,12 @@ public class SMPSOTest {
 	public SMPSOTest() throws ClassNotFoundException, JMException  {
 
 		SplittedMOEAD_DRA algorithm = (SplittedMOEAD_DRA) buildAlgorithm();
-
+		//NSGAII algorithm = (NSGAII) buildAlgorithm();
 	    // Execute the Algorithm 
 		for(i = 1; i <= qntExecucoes; i++){
 			System.out.println("Execution: "+i);
 		    SolutionSet population;
+		    algorithm.execute();
 		   	algorithm.initialize();
 		   	gen=0;
 		   	do {
@@ -73,23 +80,23 @@ public class SMPSOTest {
  		result = learning.kendallsCorrelation();
  		if(output.equals("file")){
 			learning.printToFileDouble("out/"+Kendalls+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
-			learning.printToFileBin(limiar,"out/"+Kendalls+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+			learning.printToFileBin(threshold,"out/"+Kendalls+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
 		} else if (output.equals("visualization")){
-			new Visualization(Integer.toString(gen)+" "+Kendalls, n_vars, n_objs, result, limiar);
+			new Visualization(Integer.toString(gen)+" "+Kendalls, n_vars, n_objs, result, threshold);
 		}
 		result =  learning.spearmansCorrelation();
 		if(output.equals("file")){
 			learning.printToFileDouble("out/"+Spearmans+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
-			learning.printToFileBin(limiar,"out/"+Spearmans+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+			learning.printToFileBin(threshold,"out/"+Spearmans+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
 		} else if (output.equals("visualization")){
-			new Visualization(Integer.toString(gen)+" "+Spearmans, n_vars, n_objs, result, limiar);
+			new Visualization(Integer.toString(gen)+" "+Spearmans, n_vars, n_objs, result, threshold);
 		}
 		result = learning.pearsonsCorrelation();
 		if(output.equals("file")){
 			learning.printToFileDouble("out/"+Pearsons+"/double/execucao_"+i+"/"+Integer.toString(gen)+".txt");
-			learning.printToFileBin(limiar,"out/"+Pearsons+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
+			learning.printToFileBin(threshold,"out/"+Pearsons+"/binario/execucao_"+i+"/"+Integer.toString(gen)+".txt");
 		} else if (output.equals("visualization")){
-			new Visualization(Integer.toString(gen)+" "+Pearsons, n_vars, n_objs, result, limiar);
+			new Visualization(Integer.toString(gen)+" "+Pearsons, n_vars, n_objs, result, threshold);
 		}
 		//double[][] mutualInf = learning.mutualInformation();
 		
@@ -136,9 +143,13 @@ public class SMPSOTest {
 
 	protected Algorithm buildAlgorithm() throws ClassNotFoundException, JMException {
 		Problem problem = new WFG1("Real", 4, 12, 5);
-		Algorithm algorithm = new SplittedMOEAD_DRA(problem);		
+		//Algorithm algorithm = new SplittedMOEAD_DRA(problem);		
+		Algorithm algorithm = new NSGAII(problem);
 		Mutation  mutation  ;  // "Turbulence" operator
-	    
+	    QualityIndicator indicators ; // Object to get quality indicators
+	    indicators = null ;
+
+		
 	    // Algorithm parameters
 	    /* SMPSO
 	    algorithm.setInputParameter("swarmSize",100);
@@ -158,11 +169,20 @@ public class SMPSOTest {
 
 	    HashMap  parameters ; // Operator parameters
 	    Operator  crossover ; 
-	    // Crossover operator 
+	    Operator  selection ; // Selection operator
+
+	    // Crossover operator FOR MOEA/D-DRA 
+	    /*
 	    parameters = new HashMap() ;
 	    parameters.put("CR", 1.0) ;
 	    parameters.put("F", 0.5) ;
 	    crossover = CrossoverFactory.getCrossoverOperator("DifferentialEvolutionCrossover", parameters);                   
+	    */
+	    parameters = new HashMap() ;
+	    parameters.put("probability", 0.9) ;
+	    parameters.put("distributionIndex", 20.0) ;
+	    crossover = CrossoverFactory.getCrossoverOperator("SBXCrossover", parameters);                   
+
 	    
 	    // Mutation operator
 	    parameters = new HashMap() ;
@@ -170,9 +190,18 @@ public class SMPSOTest {
 	    parameters.put("distributionIndex", 20.0) ;
 	    mutation = MutationFactory.getMutationOperator("PolynomialMutation", parameters);                    
 	    
+	    // Selection Operator 
+	    parameters = null ;
+	    selection = SelectionFactory.getSelectionOperator("BinaryTournament2", parameters) ;                           
+
+	    // Add the operators to the algorithm
 	    algorithm.addOperator("crossover",crossover);
 	    algorithm.addOperator("mutation",mutation);
-	    
+	    algorithm.addOperator("selection",selection);
+
+	    // Add the indicator object to the algorithm
+	    algorithm.setInputParameter("indicators", indicators) ;
+
 
 	    return algorithm;
 	}
